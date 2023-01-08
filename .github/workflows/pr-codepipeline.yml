@@ -1,0 +1,10 @@
+on:
+  pull_request:
+    types:
+      - opened
+jobs:
+  run_if:
+    if:  startsWith(github.head_ref, 'branch')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "PR raised from a branch"
