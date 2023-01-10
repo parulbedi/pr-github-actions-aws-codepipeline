@@ -7,10 +7,17 @@ on: [push, pull_request]
 #     types:
 #       - opened
 jobs:
-  run_if:
+  run_only_branch:
 #     if:  startsWith(github.head_ref, 'branch')
-    if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/main' }}
+    if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/main' || github.pull_request != 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - run: echo "PR raised from a branch"
+      - run: echo "child branch"
+      
+  run_only_main:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: echo "main branch"
