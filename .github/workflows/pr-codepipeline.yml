@@ -1,4 +1,7 @@
 on:
+  push:
+    branches:
+    - branch1
   pull_request:
     types:
       - opened
