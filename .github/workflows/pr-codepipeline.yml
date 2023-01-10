@@ -12,12 +12,11 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/main' || github.pull_request != 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
       - run: echo "child branch"
       
   run_only_main:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
       - run: echo "main branch"
