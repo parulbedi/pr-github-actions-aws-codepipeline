@@ -1,13 +1,16 @@
-on:
-  push:
-    branches:
-      - '*'
-  pull_request:
-    types:
-      - opened
+name: Pull Request Integration Workflow
+on: [push, pull_request]
+#   push:
+#     branches:
+#       - '*'
+#   pull_request:
+#     types:
+#       - opened
 jobs:
   run_if:
-    if:  startsWith(github.head_ref, 'branch')
+#     if:  startsWith(github.head_ref, 'branch')
+    if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - run: echo "PR raised from a branch"
