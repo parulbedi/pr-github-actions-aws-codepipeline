@@ -1,10 +1,22 @@
-on:
-  pull_request:
-    types:
-      - opened
+name: Pull Request Integration Workflow
+on: [push, pull_request]
+#   push:
+#     branches:
+#       - '*'
+#   pull_request:
+#     types:
+#       - opened
 jobs:
-  run_if:
-    if:  startsWith(github.head_ref, 'branch')
+  run_only_branch:
+#     if:  startsWith(github.head_ref, 'branch')
+    if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/main' || github.pull_request != 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "PR raised from a branch"
+      - run: echo "child branch"
+      
+  run_only_main:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - run: echo "main branch"

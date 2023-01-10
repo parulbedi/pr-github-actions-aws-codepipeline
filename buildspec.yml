@@ -3,6 +3,6 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Hi there"
+      - echo "Hi there!!"
 
 
